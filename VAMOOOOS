@@ -1,0 +1,108 @@
+import webbrowser
+import os
+
+html_content = """
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>¿Vamos a olis?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #ffe6f0;
+      padding-top: 50px;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .carta {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 300px;
+      margin: 0 auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      color: #e60073;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+    }
+
+    #si {
+      background-color: #28a745;
+      color: white;
+    }
+
+    #no {
+      background-color: #dc3545;
+      color: white;
+      position: absolute;
+      top: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: left 0.2s, top 0.2s;
+    }
+
+    .mensaje {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #e60073;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carta">
+    <h1>¿Vamos a olis?</h1>
+    <button id="si">Sí 💖</button>
+    <button id="no">No 😢</button>
+    <div class="mensaje" id="mensaje"></div>
+  </div>
+
+  <script>
+    const btnNo = document.getElementById('no');
+    const btnSi = document.getElementById('si');
+    const mensaje = document.getElementById('mensaje');
+
+    btnNo.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+      const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+      btnNo.style.left = `${x}px`;
+      btnNo.style.top = `${y}px`;
+    });
+
+    btnSi.addEventListener('click', () => {
+      mensaje.textContent = "¡Sabía que dirías que sí! 💕";
+    });
+  </script>
+
+</body>
+</html>
+"""
+
+# Guardar el archivo HTML
+file_path = os.path.abspath("index.html")
+with open(file_path, "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+# Abrir el archivo en el navegador
+webbrowser.open(f"file://{file_path}")
+
+print(f"Archivo creado y abierto en: {
